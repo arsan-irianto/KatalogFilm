@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Katalog Film</string>
+    <string name="search_hint">Cari ...</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+    <string name="action_settings">Pengaturan</string>
+
+    <string name="nav_home">Beranda</string>
+    <string name="nav_now_playing">Terbaru</string>
+    <string name="nav_upcoming">Siap Rilis</string>
+    <string name="nav_search">Cari</string>
+
+    <string name="tab_now_playing">TERBARU</string>
+    <string name="tab_upcoming">SIAP RILIS</string>
+    <string name="tab_search">CARI</string>
+
+
+    <string name="btn_search">Cari</string>
+</resources>

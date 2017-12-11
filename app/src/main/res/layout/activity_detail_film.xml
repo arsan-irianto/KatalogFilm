@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_detail_film"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context="com.example.arsan_irianto.katalogfilm.DetailFilmActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image_detail_film"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_detail_judul"
+                style="@style/TextViewDetail.Judul"
+                android:layout_weight="0.2"
+                tools:text="Judul Film" />
+            
+            <com.github.ivbaranov.mfb.MaterialFavoriteButton
+                android:id="@+id/fav_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_detail_jadwal"
+            style="@style/TextViewDetail.Jadwal"
+            tools:text="Tanggal Release" />
+
+        <TextView
+            android:id="@+id/tv_detail_overview"
+            style="@style/TextViewDetail.Deskripsi"
+            tools:text="Overview" />
+    </LinearLayout>
+
+</ScrollView>
