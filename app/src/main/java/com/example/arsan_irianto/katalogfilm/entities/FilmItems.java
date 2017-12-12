@@ -1,9 +1,15 @@
 package com.example.arsan_irianto.katalogfilm.entities;
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import org.json.JSONObject;
+import com.example.arsan_irianto.katalogfilm.databases.DatabaseContract;
+
+import static android.provider.BaseColumns._ID;
+import static com.example.arsan_irianto.katalogfilm.databases.DatabaseContract.getColumnInt;
+import static com.example.arsan_irianto.katalogfilm.databases.DatabaseContract.getColumnString;
 
 /**
  * Created by arsan-irianto on 29/11/17.
@@ -19,12 +25,14 @@ public class FilmItems implements Parcelable {
 
     public FilmItems(JSONObject jsonObject) {
         try {
+            int idFilm = jsonObject.getInt("id");
             String titleFilm = jsonObject.getString("title");
             String overviewFilm = jsonObject.getString("overview");
             String releaseDateFilm = jsonObject.getString("release_date");
             String posterImageFilm = jsonObject.getString("poster_path");
             String backDropImageFilm = jsonObject.getString("backdrop_path");
 
+            this.id = idFilm;
             this.title = titleFilm;
             this.overview = overviewFilm;
             this.releaseDate = releaseDateFilm;
@@ -34,6 +42,15 @@ public class FilmItems implements Parcelable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public FilmItems(Cursor cursor){
+        this.id = getColumnInt(cursor, _ID);
+        this.title = getColumnString(cursor, DatabaseContract.FavouriteColumn.TITLE);
+        this.overview = getColumnString(cursor, DatabaseContract.FavouriteColumn.OVERVIEW);
+        this.releaseDate = getColumnString(cursor, DatabaseContract.FavouriteColumn.RELEASEDATE);
+        this.posterImage = getColumnString(cursor, DatabaseContract.FavouriteColumn.POSTER);
+        this.backDrop = getColumnString(cursor, DatabaseContract.FavouriteColumn.BACKDROP);
     }
 
     public int getId() {

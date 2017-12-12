@@ -1,6 +1,8 @@
 package com.example.arsan_irianto.katalogfilm;
 
 import android.content.ContentValues;
+import android.database.Cursor;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -9,11 +11,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.arsan_irianto.katalogfilm.databases.MovieHelper;
+import com.example.arsan_irianto.katalogfilm.entities.FilmItems;
 import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.provider.BaseColumns._ID;
 import static com.example.arsan_irianto.katalogfilm.databases.DatabaseContract.CONTENT_URI;
 import static com.example.arsan_irianto.katalogfilm.databases.DatabaseContract.FavouriteColumn.BACKDROP;
 import static com.example.arsan_irianto.katalogfilm.databases.DatabaseContract.FavouriteColumn.OVERVIEW;
@@ -33,6 +37,8 @@ public class DetailFilmActivity extends AppCompatActivity {
     public static int RESULT_ADD = 101;
     public static int RESULT_DELETE = 301;
 
+    private boolean isEdit = false;
+
     @BindView(R.id.tv_detail_judul)
     TextView tvDetailJudul;
     @BindView(R.id.tv_detail_jadwal)
@@ -47,6 +53,7 @@ public class DetailFilmActivity extends AppCompatActivity {
     MaterialFavoriteButton favoriteButton;
 
     private MovieHelper movieHelper;
+    private FilmItems filmItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +62,7 @@ public class DetailFilmActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        final int id = getIntent().getIntExtra(EXTRA_ID_MOVIE, 0);
         final String judul = getIntent().getStringExtra(EXTRA_TITLE);
         final String jadwal = getIntent().getStringExtra(EXTRA_RELEASEDATE);
         final String deskripsi = getIntent().getStringExtra(EXTRA_OVERVIEW);
@@ -66,13 +74,31 @@ public class DetailFilmActivity extends AppCompatActivity {
         tvDetailOverview.setText(deskripsi);
 
         Glide.with(DetailFilmActivity.this)
-                .load(posterFIlm)
+                .load(backDrop)
                 //.override(600, 800)
                 .crossFade()
                 .into(imageDetailFilm);
 
-        MovieHelper movieHelper = new MovieHelper(this);
+        movieHelper = new MovieHelper(this);
         movieHelper.open();
+
+        Uri uri = getIntent().getData();
+
+        if (uri != null) {
+            Cursor cursor = getContentResolver().query(uri, null, _ID + " = ?", new String[]{EXTRA_ID_MOVIE}, null);
+
+            if (cursor != null){
+
+                if(cursor.moveToFirst()) filmItems = new FilmItems(cursor);
+                cursor.close();
+            }
+        }
+
+        if (filmItems != null) {
+            favoriteButton.setFavorite(true);
+        } else {
+            favoriteButton.setFavorite(false);
+        }
 
         favoriteButton.setOnFavoriteChangeListener(new MaterialFavoriteButton.OnFavoriteChangeListener() {
             @Override
@@ -80,6 +106,7 @@ public class DetailFilmActivity extends AppCompatActivity {
                 String favoriteStatus="";
 
                 ContentValues values = new ContentValues();
+                values.put(_ID, id);
                 values.put(TITLE,judul);
                 values.put(OVERVIEW, deskripsi);
                 values.put(RELEASEDATE, jadwal);
@@ -89,13 +116,15 @@ public class DetailFilmActivity extends AppCompatActivity {
                 if(favorite){
                     //favoriteStatus = "Favourite";
                     getContentResolver().insert(CONTENT_URI,values);
-
                     setResult(RESULT_ADD);
+                    Toast.makeText(getApplicationContext(), "Added to Favorite", Toast.LENGTH_SHORT).show();
                     finish();
                 }else{
-                    favoriteStatus = "Unfavourite";
+                    getContentResolver().delete(getIntent().getData(),null,null);
+                    setResult(RESULT_DELETE, null);
+                    Toast.makeText(getApplicationContext(), "Remove from Favorite", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
-                Toast.makeText(getApplicationContext(), favoriteStatus, Toast.LENGTH_SHORT).show();
             }
         });
     }

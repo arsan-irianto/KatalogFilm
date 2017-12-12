@@ -2,6 +2,8 @@ package com.example.arsan_irianto.katalogfilm.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.arsan_irianto.katalogfilm.DetailFilmActivity;
 import com.example.arsan_irianto.katalogfilm.R;
+import com.example.arsan_irianto.katalogfilm.databases.MovieHelper;
 import com.example.arsan_irianto.katalogfilm.entities.FilmItems;
 import com.example.arsan_irianto.katalogfilm.utilities.CustomOnItemClickListener;
 import com.github.ivbaranov.mfb.MaterialFavoriteButton;
@@ -24,6 +27,8 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.arsan_irianto.katalogfilm.databases.DatabaseContract.CONTENT_URI;
+
 /**
  * Created by arsan-irianto on 03/12/17.
  */
@@ -34,6 +39,7 @@ public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.MyView
     private ArrayList<FilmItems> mFilm = new ArrayList<>();
     //private LayoutInflater mLayoutInflater;
     private Context mContext;
+    private Cursor listFilm;
 
     public ListFilmAdapter(Context context) {
         this.mContext = context;
@@ -56,6 +62,7 @@ public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.MyView
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
+        final int idMovie = mFilm.get(position).getId();
         final String strTitle = mFilm.get(position).getTitle();
         final String strOverview = mFilm.get(position).getOverview();
         final String stringReleaseDate = formatReleaseDate(mFilm.get(position).getReleaseDate());
@@ -92,11 +99,15 @@ public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.MyView
                     public void onItemClicked(View view, int position) {
                         //Toast.makeText(mContext, "Details " + strTitle, Toast.LENGTH_SHORT).show();
                         Intent filmDataIntent = new Intent(mContext, DetailFilmActivity.class);
+                        filmDataIntent.putExtra(DetailFilmActivity.EXTRA_ID_MOVIE, idMovie);
                         filmDataIntent.putExtra(DetailFilmActivity.EXTRA_TITLE, strTitle);
                         filmDataIntent.putExtra(DetailFilmActivity.EXTRA_OVERVIEW, strOverview);
                         filmDataIntent.putExtra(DetailFilmActivity.EXTRA_RELEASEDATE, stringReleaseDate);
                         filmDataIntent.putExtra(DetailFilmActivity.EXTRA_POSTERIMAGE, strUrlPoster);
                         filmDataIntent.putExtra(DetailFilmActivity.EXTRA_BACKDROP, strUrlBackDrop);
+
+                        Uri uri = Uri.parse(CONTENT_URI+"/"+idMovie);
+                        filmDataIntent.setData(uri);
 
                         mContext.startActivity(filmDataIntent);
 
