@@ -95,6 +95,7 @@ public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.MyView
                         filmDataIntent.putExtra(DetailFilmActivity.EXTRA_TITLE, strTitle);
                         filmDataIntent.putExtra(DetailFilmActivity.EXTRA_OVERVIEW, strOverview);
                         filmDataIntent.putExtra(DetailFilmActivity.EXTRA_RELEASEDATE, stringReleaseDate);
+                        filmDataIntent.putExtra(DetailFilmActivity.EXTRA_POSTERIMAGE, strUrlPoster);
                         filmDataIntent.putExtra(DetailFilmActivity.EXTRA_BACKDROP, strUrlBackDrop);
 
                         mContext.startActivity(filmDataIntent);
