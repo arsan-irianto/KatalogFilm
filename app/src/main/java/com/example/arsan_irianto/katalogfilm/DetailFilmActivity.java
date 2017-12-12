@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.github.ivbaranov.mfb.MaterialFavoriteButton;
@@ -53,5 +54,18 @@ public class DetailFilmActivity extends AppCompatActivity {
                 //.override(600, 800)
                 .crossFade()
                 .into(imageDetailFilm);
+
+        favoriteButton.setOnFavoriteChangeListener(new MaterialFavoriteButton.OnFavoriteChangeListener() {
+            @Override
+            public void onFavoriteChanged(MaterialFavoriteButton buttonView, boolean favorite) {
+                String favoriteStatus="";
+                if(favorite){
+                    favoriteStatus = "Favourite";
+                }else{
+                    favoriteStatus = "Unfavourite";
+                }
+                Toast.makeText(getApplicationContext(), favoriteStatus, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
