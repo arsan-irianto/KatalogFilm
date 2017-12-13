@@ -90,7 +90,7 @@ public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.MyView
         holder.tvJadwal.setText(stringReleaseDate);
 
         // Holder Click Listener
-        holder.itemView.setOnClickListener(new CustomOnItemClickListener(position,
+/*        holder.itemView.setOnClickListener(new CustomOnItemClickListener(position,
                 new CustomOnItemClickListener.OnItemClickCallback() {
                     @Override
                     public void onItemClicked(View view, int position) {
@@ -109,7 +109,7 @@ public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.MyView
                         mContext.startActivity(filmDataIntent);
 
                     }
-                }));
+                }));*/
 
     }
 

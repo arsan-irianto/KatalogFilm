@@ -1,9 +1,7 @@
 package com.example.arsan_irianto.filmfavorit.fragments;
 
 
-import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -12,14 +10,10 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.example.arsan_irianto.filmfavorit.DetailFilmActivity;
 import com.example.arsan_irianto.filmfavorit.R;
 import com.example.arsan_irianto.filmfavorit.adapters.CardFilmAdapter;
-import com.example.arsan_irianto.filmfavorit.databases.DatabaseContract;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

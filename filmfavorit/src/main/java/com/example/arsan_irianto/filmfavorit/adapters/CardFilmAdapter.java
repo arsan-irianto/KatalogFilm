@@ -4,11 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
@@ -18,18 +16,12 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.arsan_irianto.filmfavorit.DetailFilmActivity;
 import com.example.arsan_irianto.filmfavorit.R;
-import com.example.arsan_irianto.filmfavorit.databases.DatabaseContract;
 import com.example.arsan_irianto.filmfavorit.entities.FilmListItems;
-import com.example.arsan_irianto.filmfavorit.utilities.CustomOnItemClickListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.example.arsan_irianto.filmfavorit.databases.DatabaseContract.CONTENT_URI;
-import static com.example.arsan_irianto.filmfavorit.databases.DatabaseContract.FavouriteColumn.OVERVIEW;
-import static com.example.arsan_irianto.filmfavorit.databases.DatabaseContract.FavouriteColumn.POSTER;
-import static com.example.arsan_irianto.filmfavorit.databases.DatabaseContract.FavouriteColumn.TITLE;
-import static com.example.arsan_irianto.filmfavorit.databases.DatabaseContract.getColumnString;
 
 /**
  * Created by arsan-irianto on 12/13/17.

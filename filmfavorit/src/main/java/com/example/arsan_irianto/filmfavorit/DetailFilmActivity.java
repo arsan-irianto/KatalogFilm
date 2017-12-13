@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.arsan_irianto.filmfavorit.entities.FilmItems;
 import com.example.arsan_irianto.filmfavorit.entities.FilmListItems;
 import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 
