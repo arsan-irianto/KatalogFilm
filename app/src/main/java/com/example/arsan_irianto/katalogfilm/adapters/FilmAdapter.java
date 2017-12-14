@@ -119,7 +119,6 @@ public class FilmAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(mContext,mFilm.get(position).getTitle(),Toast.LENGTH_SHORT).show();
                 Intent filmDataIntent = new Intent(mContext, DetailFilmActivity.class);
                 filmDataIntent.putExtra(DetailFilmActivity.EXTRA_TITLE, strTitle);
                 filmDataIntent.putExtra(DetailFilmActivity.EXTRA_OVERVIEW, strOverview);

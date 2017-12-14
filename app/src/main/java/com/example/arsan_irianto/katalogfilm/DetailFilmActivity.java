@@ -75,7 +75,6 @@ public class DetailFilmActivity extends AppCompatActivity {
 
         Glide.with(DetailFilmActivity.this)
                 .load(backDrop)
-                //.override(600, 800)
                 .crossFade()
                 .into(imageDetailFilm);
 
@@ -87,9 +86,9 @@ public class DetailFilmActivity extends AppCompatActivity {
         if (uri != null) {
             Cursor cursor = getContentResolver().query(uri, null, _ID + " = ?", new String[]{EXTRA_ID_MOVIE}, null);
 
-            if (cursor != null){
+            if (cursor != null) {
 
-                if(cursor.moveToFirst()) filmItems = new FilmItems(cursor);
+                if (cursor.moveToFirst()) filmItems = new FilmItems(cursor);
                 cursor.close();
             }
         }
@@ -103,24 +102,22 @@ public class DetailFilmActivity extends AppCompatActivity {
         favoriteButton.setOnFavoriteChangeListener(new MaterialFavoriteButton.OnFavoriteChangeListener() {
             @Override
             public void onFavoriteChanged(MaterialFavoriteButton buttonView, boolean favorite) {
-                String favoriteStatus="";
 
                 ContentValues values = new ContentValues();
                 values.put(_ID, id);
-                values.put(TITLE,judul);
+                values.put(TITLE, judul);
                 values.put(OVERVIEW, deskripsi);
                 values.put(RELEASEDATE, jadwal);
                 values.put(POSTER, posterFIlm);
                 values.put(BACKDROP, backDrop);
 
-                if(favorite){
-                    //favoriteStatus = "Favourite";
-                    getContentResolver().insert(CONTENT_URI,values);
+                if (favorite) {
+                    getContentResolver().insert(CONTENT_URI, values);
                     setResult(RESULT_ADD);
                     Toast.makeText(getApplicationContext(), "Added to Favorite", Toast.LENGTH_SHORT).show();
                     finish();
-                }else{
-                    getContentResolver().delete(getIntent().getData(),null,null);
+                } else {
+                    getContentResolver().delete(getIntent().getData(), null, null);
                     setResult(RESULT_DELETE, null);
                     Toast.makeText(getApplicationContext(), "Remove from Favorite", Toast.LENGTH_SHORT).show();
                     finish();

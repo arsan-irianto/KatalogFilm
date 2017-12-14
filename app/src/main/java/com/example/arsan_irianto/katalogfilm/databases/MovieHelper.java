@@ -20,7 +20,7 @@ public class MovieHelper {
     private DatabaseHelper databaseHelper;
     private SQLiteDatabase sqLiteDatabase;
 
-    public MovieHelper(Context context){
+    public MovieHelper(Context context) {
         this.context = context;
     }
 
@@ -35,36 +35,36 @@ public class MovieHelper {
     }
 
 
-    public Cursor queryFavouriteById(String id){
-        return sqLiteDatabase.query(DATABASE_TABLE,null
-                ,_ID + " = ?"
-                ,new String[]{id}
-                ,null
-                ,null
-                ,null
-                ,null);
+    public Cursor queryFavouriteById(String id) {
+        return sqLiteDatabase.query(DATABASE_TABLE, null
+                , _ID + " = ?"
+                , new String[]{id}
+                , null
+                , null
+                , null
+                , null);
     }
 
-    public Cursor queryFavourite(){
+    public Cursor queryFavourite() {
         return sqLiteDatabase.query(DATABASE_TABLE
-                ,null
-                ,null
-                ,null
-                ,null
-                ,null
-                ,_ID + " DESC");
+                , null
+                , null
+                , null
+                , null
+                , null
+                , _ID + " DESC");
     }
 
-    public long insertFavourite(ContentValues values){
-        return sqLiteDatabase.insert(DATABASE_TABLE,null,values);
+    public long insertFavourite(ContentValues values) {
+        return sqLiteDatabase.insert(DATABASE_TABLE, null, values);
     }
 
-    public int updateFavourite(String id,ContentValues values){
-        return sqLiteDatabase.update(DATABASE_TABLE,values,_ID +" = ?",new String[]{id} );
+    public int updateFavourite(String id, ContentValues values) {
+        return sqLiteDatabase.update(DATABASE_TABLE, values, _ID + " = ?", new String[]{id});
     }
 
-    public int deleteFavourite(String id){
-        return sqLiteDatabase.delete(DATABASE_TABLE,_ID + " = ?", new String[]{id});
+    public int deleteFavourite(String id) {
+        return sqLiteDatabase.delete(DATABASE_TABLE, _ID + " = ?", new String[]{id});
     }
 
 }

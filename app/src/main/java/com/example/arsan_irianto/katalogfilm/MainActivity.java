@@ -41,13 +41,8 @@ public class MainActivity extends AppCompatActivity implements
         ButterKnife.bind(this);
         filmAdapter = new FilmAdapter(this);
         filmAdapter.notifyDataSetChanged();
-        //lvFilm = (ListView)findViewById(R.id.lv_film);
 
         lvFilm.setAdapter(filmAdapter);
-
-        //edtSearch = (EditText) findViewById(R.id.edt_search);
-
-        //btnSearch = (Button) findViewById(R.id.btn_search);
 
         btnSearch.setOnClickListener(this);
 
@@ -56,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements
         bundle.putString(EXTRAS_SEARCH, searchFilm);
 
         getSupportLoaderManager().initLoader(0, bundle, this);
-        //getSupportLoaderManager()
     }
 
     @Override

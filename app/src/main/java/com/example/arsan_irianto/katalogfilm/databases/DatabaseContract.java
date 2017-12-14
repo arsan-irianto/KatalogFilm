@@ -8,7 +8,7 @@ import android.provider.BaseColumns;
  * Created by arsan-irianto on 12/12/17.
  */
 
-public class DatabaseContract  {
+public class DatabaseContract {
     public static String TABLE_FAVOURITE = "favourite";
 
     public static final class FavouriteColumn implements BaseColumns {
@@ -28,14 +28,14 @@ public class DatabaseContract  {
             .build();
 
     public static String getColumnString(Cursor cursor, String columnName) {
-        return cursor.getString( cursor.getColumnIndex(columnName) );
+        return cursor.getString(cursor.getColumnIndex(columnName));
     }
 
     public static int getColumnInt(Cursor cursor, String columnName) {
-        return cursor.getInt( cursor.getColumnIndex(columnName) );
+        return cursor.getInt(cursor.getColumnIndex(columnName));
     }
 
     public static long getColumnLong(Cursor cursor, String columnName) {
-        return cursor.getLong( cursor.getColumnIndex(columnName) );
+        return cursor.getLong(cursor.getColumnIndex(columnName));
     }
 }

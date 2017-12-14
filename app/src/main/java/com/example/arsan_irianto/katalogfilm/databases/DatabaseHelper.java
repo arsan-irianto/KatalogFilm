@@ -18,12 +18,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     public static final String CREATE_TABLE_FAVOURITE = String.format("CREATE TABLE %s"
-            + " (%s INTEGER PRIMARY KEY," +
-            " %s TEXT NOT NULL," +
-            " %s TEXT NOT NULL," +
-            " %s TEXT NOT NULL," +
-            " %s TEXT NOT NULL," +
-            " %s TEXT NOT NULL)",TABLE_FAVOURITE,
+                    + " (%s INTEGER PRIMARY KEY," +
+                    " %s TEXT NOT NULL," +
+                    " %s TEXT NOT NULL," +
+                    " %s TEXT NOT NULL," +
+                    " %s TEXT NOT NULL," +
+                    " %s TEXT NOT NULL)", TABLE_FAVOURITE,
             FavouriteColumn._ID,
             FavouriteColumn.TITLE,
             FavouriteColumn.OVERVIEW,
@@ -32,7 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             FavouriteColumn.BACKDROP);
 
     public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME,null,DATABASE_VERSION);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override

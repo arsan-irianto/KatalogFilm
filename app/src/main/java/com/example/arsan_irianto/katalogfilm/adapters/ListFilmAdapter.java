@@ -106,7 +106,7 @@ public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.MyView
                         filmDataIntent.putExtra(DetailFilmActivity.EXTRA_POSTERIMAGE, strUrlPoster);
                         filmDataIntent.putExtra(DetailFilmActivity.EXTRA_BACKDROP, strUrlBackDrop);
 
-                        Uri uri = Uri.parse(CONTENT_URI+"/"+idMovie);
+                        Uri uri = Uri.parse(CONTENT_URI + "/" + idMovie);
                         filmDataIntent.setData(uri);
 
                         mContext.startActivity(filmDataIntent);
