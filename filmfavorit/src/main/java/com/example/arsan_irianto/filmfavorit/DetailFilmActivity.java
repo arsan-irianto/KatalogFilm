@@ -51,8 +51,7 @@ public class DetailFilmActivity extends AppCompatActivity {
     @BindView(R.id.fav_button)
     MaterialFavoriteButton favoriteButton;
 
-    /*private MovieHelper movieHelper;*/
-    private FilmListItems filmItems=null;
+    private FilmListItems filmItems = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,17 +67,13 @@ public class DetailFilmActivity extends AppCompatActivity {
         final String posterFIlm = getIntent().getStringExtra(EXTRA_POSTERIMAGE);
         final String backDrop = getIntent().getStringExtra(EXTRA_BACKDROP);
 
-
-/*        movieHelper = new MovieHelper(this);
-        movieHelper.open();*/
-
         Uri uri = getIntent().getData();
 
         if (uri != null) {
             Cursor cursor = getContentResolver().query(uri, null, null, null, null);
 
-            if (cursor != null){
-                if(cursor.moveToFirst()) filmItems = new FilmListItems(cursor);
+            if (cursor != null) {
+                if (cursor.moveToFirst()) filmItems = new FilmListItems(cursor);
                 cursor.close();
             }
         }
@@ -90,7 +85,6 @@ public class DetailFilmActivity extends AppCompatActivity {
 
             Glide.with(DetailFilmActivity.this)
                     .load(filmItems.getBackDrop())
-                    //.override(600, 800)
                     .crossFade()
                     .into(imageDetailFilm);
             favoriteButton.setFavorite(true);
@@ -101,24 +95,22 @@ public class DetailFilmActivity extends AppCompatActivity {
         favoriteButton.setOnFavoriteChangeListener(new MaterialFavoriteButton.OnFavoriteChangeListener() {
             @Override
             public void onFavoriteChanged(MaterialFavoriteButton buttonView, boolean favorite) {
-                String favoriteStatus="";
 
                 ContentValues values = new ContentValues();
                 values.put(_ID, id);
-                values.put(TITLE,judul);
+                values.put(TITLE, judul);
                 values.put(OVERVIEW, deskripsi);
                 values.put(RELEASEDATE, jadwal);
                 values.put(POSTER, posterFIlm);
                 values.put(BACKDROP, backDrop);
 
-                if(favorite){
-                    //favoriteStatus = "Favourite";
-                    getContentResolver().insert(CONTENT_URI,values);
+                if (favorite) {
+                    getContentResolver().insert(CONTENT_URI, values);
                     setResult(RESULT_ADD);
                     Toast.makeText(getApplicationContext(), "Added to Favorite", Toast.LENGTH_SHORT).show();
                     finish();
-                }else{
-                    getContentResolver().delete(getIntent().getData(),null,null);
+                } else {
+                    getContentResolver().delete(getIntent().getData(), null, null);
                     setResult(RESULT_DELETE, null);
                     Toast.makeText(getApplicationContext(), "Remove from Favorite", Toast.LENGTH_SHORT).show();
                     finish();
@@ -130,8 +122,5 @@ public class DetailFilmActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-/*        if (movieHelper != null) {
-            movieHelper.close();
-        }*/
     }
 }

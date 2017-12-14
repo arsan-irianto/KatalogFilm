@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.arsan_irianto.filmfavorit.MainActivity;
 import com.example.arsan_irianto.filmfavorit.R;
 import com.example.arsan_irianto.filmfavorit.adapters.ListFilmAdapter;
 import com.example.arsan_irianto.filmfavorit.entities.FilmItems;

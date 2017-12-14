@@ -45,7 +45,7 @@ public class FilmItems implements Parcelable {
         }
     }
 
-    public FilmItems(Cursor cursor){
+    public FilmItems(Cursor cursor) {
         this.id = getColumnInt(cursor, _ID);
         this.title = getColumnString(cursor, DatabaseContract.FavouriteColumn.TITLE);
         this.overview = getColumnString(cursor, DatabaseContract.FavouriteColumn.OVERVIEW);

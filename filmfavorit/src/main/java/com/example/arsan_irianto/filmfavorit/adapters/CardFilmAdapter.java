@@ -30,10 +30,14 @@ import static com.example.arsan_irianto.filmfavorit.databases.DatabaseContract.C
 
 public class CardFilmAdapter extends CursorAdapter {
 
+    @BindView(R.id.img_poster)
     ImageView imgPoster;
-    @BindView(R.id.tv_title) TextView tvTitle;
-    @BindView(R.id.tv_overview) TextView tvOverview;
-    @BindView(R.id.btn_detail) Button btnDetail;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.tv_overview)
+    TextView tvOverview;
+    @BindView(R.id.btn_detail)
+    Button btnDetail;
 
     public CardFilmAdapter(Context context, Cursor c, boolean autoRequery) {
         super(context, c, autoRequery);
@@ -41,7 +45,7 @@ public class CardFilmAdapter extends CursorAdapter {
 
     @Override
     public View newView(final Context context, final Cursor cursor, ViewGroup parent) {
-        View view  = LayoutInflater.from(context).inflate(R.layout.item_cardview_film, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_cardview_film, parent, false);
         return view;
     }
 
@@ -53,9 +57,8 @@ public class CardFilmAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, final Context context, final Cursor cursor) {
         final FilmListItems filmListItems = new FilmListItems(cursor);
-        imgPoster = (ImageView) view.findViewById(R.id.img_poster);
         ButterKnife.bind(this, view);
-        if(cursor!=null){
+        if (cursor != null) {
 
             final String strOverview = filmListItems.getOverview();
 
@@ -81,7 +84,7 @@ public class CardFilmAdapter extends CursorAdapter {
             public void onClick(View v) {
                 int id = filmListItems.getId();
                 Intent intent = new Intent(context, DetailFilmActivity.class);
-                intent.setData(Uri.parse(CONTENT_URI+"/"+id));
+                intent.setData(Uri.parse(CONTENT_URI + "/" + id));
                 context.startActivity(intent);
                 Toast.makeText(context, "Id film " + id, Toast.LENGTH_SHORT).show();
             }

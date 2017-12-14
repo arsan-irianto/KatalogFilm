@@ -24,10 +24,11 @@ import static com.example.arsan_irianto.filmfavorit.databases.DatabaseContract.C
  * A simple {@link Fragment} subclass.
  */
 public class FavouriteFilmFragment extends Fragment implements
-        LoaderManager.LoaderCallbacks<Cursor>{
+        LoaderManager.LoaderCallbacks<Cursor> {
 
     private CardFilmAdapter cardFilmAdapter;
-    @BindView(R.id.lv_films) ListView lvFilms;
+    @BindView(R.id.lv_films)
+    ListView lvFilms;
 
     private final int LOAD_MOVIES_ID = 110;
 
@@ -43,11 +44,10 @@ public class FavouriteFilmFragment extends Fragment implements
         View view = inflater.inflate(R.layout.fragment_favourite_film, container, false);
         ButterKnife.bind(this, view);
 
-        cardFilmAdapter = new CardFilmAdapter(getContext(),null,true);
+        cardFilmAdapter = new CardFilmAdapter(getContext(), null, true);
         lvFilms.setAdapter(cardFilmAdapter);
 
         getLoaderManager().initLoader(LOAD_MOVIES_ID, null, this);
-
 
 
         return view;
@@ -61,7 +61,7 @@ public class FavouriteFilmFragment extends Fragment implements
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(getContext(), CONTENT_URI, null,null,null,null);
+        return new CursorLoader(getContext(), CONTENT_URI, null, null, null, null);
     }
 
     @Override

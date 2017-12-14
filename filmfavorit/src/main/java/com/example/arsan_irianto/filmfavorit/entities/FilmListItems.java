@@ -21,7 +21,7 @@ public class FilmListItems implements Parcelable {
     private String posterImage;
     private String backDrop;
 
-    public FilmListItems(){
+    public FilmListItems() {
 
     }
 

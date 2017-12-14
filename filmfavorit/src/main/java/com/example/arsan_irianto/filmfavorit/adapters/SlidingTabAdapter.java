@@ -20,7 +20,7 @@ public class SlidingTabAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         if (position == 0) {
             return new FavouriteFilmFragment();
-        }  else {
+        } else {
             return new SearchFilmFragment();
         }
     }

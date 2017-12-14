@@ -1,7 +1,5 @@
 package com.example.arsan_irianto.filmfavorit.utilities;
 
-//import android.content.AsyncTaskLoader;
-
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
@@ -28,8 +26,8 @@ public class TaskLoader extends AsyncTaskLoader<ArrayList<FilmItems>> {
     private Boolean mHasResult = false;
     private String mJudulFilm;
     private String mUrlFilter;
-    public static final String NOW_PLAYING = "now_playing";
-    public static final String UPCOMING = "upcoming";
+    private static final String NOW_PLAYING = "now_playing";
+    private static final String UPCOMING = "upcoming";
     public static final String QUERY = "query";
 
     public TaskLoader(final Context context, String judulFilm, String filterBy) {
