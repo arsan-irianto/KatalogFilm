@@ -15,14 +15,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.arsan_irianto.katalogfilm.adapters.SlidingTabAdapter;
 import com.example.arsan_irianto.katalogfilm.fragments.NowPlayingFragment;
 import com.example.arsan_irianto.katalogfilm.fragments.SearchFilmFragment;
 import com.example.arsan_irianto.katalogfilm.fragments.UpcomingFragment;
-
-import java.text.SimpleDateFormat;
-import java.util.Locale;
+import com.example.arsan_irianto.katalogfilm.services.MovieSchedulerTask;
 
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -39,6 +38,8 @@ public class NavigationActivity extends AppCompatActivity
     private TabLayout.Tab nowPlaying;
     private TabLayout.Tab upComing;
     private TabLayout.Tab searchFilm;
+
+    private MovieSchedulerTask mSchedulerTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,13 +64,15 @@ public class NavigationActivity extends AppCompatActivity
         notificationBroadcastReceiver = new NotificationBroadcastReceiver();
         appNotification();
 
+        mSchedulerTask = new MovieSchedulerTask(this);
+
+        mSchedulerTask.createPeriodicTask();
+        Toast.makeText(this, "Periodic Task Created", Toast.LENGTH_SHORT).show();
     }
 
     private void appNotification() {
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
-
-        String repeatTimeTime = "06:00";
-
+        /*SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());*/
+        String repeatTimeTime = "10:47";
         notificationBroadcastReceiver.setRepeatingAlarm(this, repeatTimeTime);
     }
 

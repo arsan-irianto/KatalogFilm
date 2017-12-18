@@ -110,7 +110,7 @@ class StackRemoteViewsFactory
         RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.widget_item);
 
         rv.setImageViewBitmap(R.id.image_view, bmp);
-        rv.setTextViewText(R.id.tv_widget_title, judul);
+/*        rv.setTextViewText(R.id.tv_widget_title, judul);*/
 
         Bundle extras = new Bundle();
         extras.putInt(FavMovieWidget.EXTRA_ITEM, position);

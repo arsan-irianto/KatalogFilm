@@ -3,6 +3,8 @@
     package="com.example.arsan_irianto.katalogfilm">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <permission
         android:name="com.example.arsan_irianto.katalogfilm.WRITE_DATABASE"
@@ -55,6 +57,15 @@
         <service
             android:name=".StackWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <service
+            android:name=".services.MovieScheduleService"
+            android:exported="true"
+            android:permission="com.google.android.gms.permission.BIND_NETWORK_TASK_SERVICE">
+            <intent-filter>
+                <action android:name="com.google.android.gms.gcm.ACTION_TASK_READY" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
