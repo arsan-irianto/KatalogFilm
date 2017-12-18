@@ -47,6 +47,11 @@
                 android:resource="@xml/fav_movie_widget_info" />
         </receiver>
 
+        <receiver
+            android:name=".NotificationBroadcastReceiver"
+            android:enabled="true"
+            android:exported="false" />
+
         <service
             android:name=".StackWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
