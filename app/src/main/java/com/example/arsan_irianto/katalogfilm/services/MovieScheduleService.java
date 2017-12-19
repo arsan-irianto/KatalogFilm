@@ -1,7 +1,9 @@
 package com.example.arsan_irianto.katalogfilm.services;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
@@ -9,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.example.arsan_irianto.katalogfilm.BuildConfig;
+import com.example.arsan_irianto.katalogfilm.DetailNotificationActivity;
 import com.example.arsan_irianto.katalogfilm.R;
 import com.example.arsan_irianto.katalogfilm.entities.FilmItems;
 import com.example.arsan_irianto.katalogfilm.utilities.NotificationID;
@@ -33,7 +36,6 @@ import cz.msebera.android.httpclient.Header;
 
 public class MovieScheduleService extends GcmTaskService {
     public static final String UPCOMING = "upcoming";
-    public static final String QUERY = "query";
     static String TAG_TASK_MOVIE_LOG = "MovieTask";
     final String TAG = MovieScheduleService.class.getSimpleName();
 
@@ -62,7 +64,7 @@ public class MovieScheduleService extends GcmTaskService {
                 Log.d(TAG, result);
                 Calendar c = Calendar.getInstance();
                 SimpleDateFormat todayDate = new SimpleDateFormat("yyyy-MM-dd");
-                String formattedDate1 = todayDate.format(c.getTime());
+                String formattedDate = todayDate.format(c.getTime());
                 try {
                     JSONObject responseObject = new JSONObject(result);
                     JSONArray resultsJson = responseObject.getJSONArray("results");
@@ -71,15 +73,18 @@ public class MovieScheduleService extends GcmTaskService {
                         JSONObject film = resultsJson.getJSONObject(i);
                         String tglRelease = film.getString("release_date");
 
-                        /*Log.d(TAG, "tanggal release " + tglRelease);*/
-                        /*DateFormat df = new SimpleDateFormat("yyyy-MM-dd");*/
-
-
-                        Log.d(TAG, "Current : " + formattedDate1 + ", Release : " + tglRelease);
-                        if (tglRelease.equals(formattedDate1)) {
+                        Log.d(TAG, "Current : " + formattedDate + ", Release : " + tglRelease);
+                        if (tglRelease.equals(formattedDate)) {
                             title = film.getString("title");
                             message = "Hari ini " + title + " release";
-                            showNotification(getApplicationContext(), title, message, NotificationID.getID());
+
+                            Intent notifyIntent = new Intent(getApplicationContext(), DetailNotificationActivity.class);
+                            notifyIntent.putExtra(DetailNotificationActivity.EXTRA_ID_MOVIE, film.getString("id"));
+                            PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),
+                                    NotificationID.getID(), notifyIntent,
+                                    PendingIntent.FLAG_UPDATE_CURRENT);
+
+                            showNotification(getApplicationContext(), title, message, NotificationID.getID(), pendingIntent);
                         }
                     }
 
@@ -95,13 +100,14 @@ public class MovieScheduleService extends GcmTaskService {
         });
     }
 
-    private void showNotification(Context applicationContext, String title, String message, int notifId) {
+    private void showNotification(Context applicationContext, String title, String message, int notifId, PendingIntent pendingIntent) {
         NotificationManager notificationManagerCompat = (NotificationManager) applicationContext.getSystemService(Context.NOTIFICATION_SERVICE);
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(applicationContext)
                 .setContentTitle(title)
                 .setSmallIcon(R.drawable.ic_stat_name)
                 .setContentText(message)
+                .setContentIntent(pendingIntent)
                 .setColor(ContextCompat.getColor(applicationContext, android.R.color.black))
                 .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
                 .setSound(alarmSound);

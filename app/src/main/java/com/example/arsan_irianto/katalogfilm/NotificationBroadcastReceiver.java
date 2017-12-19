@@ -13,6 +13,8 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.arsan_irianto.katalogfilm.utilities.NotificationID;
+
 import java.util.Calendar;
 
 /**
@@ -30,18 +32,24 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
         String title = "Catalogue Movie";
         int notifId = NOTIF_ID_REPEATING;
 
+        Intent notifyIntent = new Intent(context, NavigationActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context,
+                NotificationID.getID(), notifyIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+
         Log.v("ON RECIEVE", title + " " + notifId);
-        showAlarmNotification(context, title, message, notifId);
+        showAlarmNotification(context, title, message, notifId, pendingIntent);
         Toast.makeText(context, "I'm running", Toast.LENGTH_LONG).show();
     }
 
-    private void showAlarmNotification(Context context, String title, String message, int notifId) {
+    private void showAlarmNotification(Context context, String title, String message, int notifId, PendingIntent pendingIntent) {
         NotificationManager notificationManagerCompat = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                 .setSmallIcon(R.drawable.ic_stat_name)
                 .setContentTitle(title)
                 .setContentText(message)
+                .setContentIntent(pendingIntent)
                 .setColor(ContextCompat.getColor(context, android.R.color.transparent))
                 .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
                 .setSound(alarmSound);

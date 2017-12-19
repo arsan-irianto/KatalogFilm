@@ -71,8 +71,7 @@ public class NavigationActivity extends AppCompatActivity
     }
 
     private void appNotification() {
-        /*SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());*/
-        String repeatTimeTime = "10:47";
+        String repeatTimeTime = "08:00";
         notificationBroadcastReceiver.setRepeatingAlarm(this, repeatTimeTime);
     }
 

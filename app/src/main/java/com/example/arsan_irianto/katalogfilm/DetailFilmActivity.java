@@ -1,10 +1,12 @@
 package com.example.arsan_irianto.katalogfilm;
 
+import android.appwidget.AppWidgetManager;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,22 +38,17 @@ public class DetailFilmActivity extends AppCompatActivity {
 
     public static int RESULT_ADD = 101;
     public static int RESULT_DELETE = 301;
-
-    private boolean isEdit = false;
-
     @BindView(R.id.tv_detail_judul)
     TextView tvDetailJudul;
     @BindView(R.id.tv_detail_jadwal)
     TextView tvDetailJadwal;
     @BindView(R.id.tv_detail_overview)
     TextView tvDetailOverview;
-
     @BindView(R.id.image_detail_film)
     ImageView imageDetailFilm;
-
     @BindView(R.id.fav_button)
     MaterialFavoriteButton favoriteButton;
-
+    private boolean isEdit = false;
     private MovieHelper movieHelper;
     private FilmItems filmItems;
 
@@ -122,6 +119,11 @@ public class DetailFilmActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Remove from Favorite", Toast.LENGTH_SHORT).show();
                     finish();
                 }
+
+                // Update favorit movie in FavMovieWidget with send broadcast intent
+                Intent intent = new Intent(DetailFilmActivity.this, FavMovieWidget.class);
+                intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                sendBroadcast(intent);
             }
         });
     }

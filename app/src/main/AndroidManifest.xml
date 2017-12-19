@@ -48,7 +48,6 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/fav_movie_widget_info" />
         </receiver>
-
         <receiver
             android:name=".NotificationBroadcastReceiver"
             android:enabled="true"
@@ -57,7 +56,6 @@
         <service
             android:name=".StackWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
-
         <service
             android:name=".services.MovieScheduleService"
             android:exported="true"
@@ -66,6 +64,8 @@
                 <action android:name="com.google.android.gms.gcm.ACTION_TASK_READY" />
             </intent-filter>
         </service>
+
+        <activity android:name=".DetailNotificationActivity"></activity>
     </application>
 
 </manifest>

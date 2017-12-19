@@ -118,8 +118,7 @@ class StackRemoteViewsFactory
         Intent fillInIntent = new Intent();
         fillInIntent.putExtras(extras);
 
-
-        /*rv.setOnClickFillInIntent(R.id.image_view, fillInIntent);*/
+        rv.setOnClickFillInIntent(R.id.image_view, fillInIntent);
 
         return rv;
     }

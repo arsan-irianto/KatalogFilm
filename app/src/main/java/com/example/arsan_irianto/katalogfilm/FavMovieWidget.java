@@ -3,6 +3,7 @@ package com.example.arsan_irianto.katalogfilm;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -75,6 +76,19 @@ public class FavMovieWidget extends AppWidgetProvider {
             Toast.makeText(context, "Touched view " + viewIndex, Toast.LENGTH_SHORT).show();
         }
         super.onReceive(context, intent);
+
+
+        // Receive Broadcast intent from DetailFilmActivity to update widget content
+        if (intent.getAction().equals(
+                AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
+
+            ComponentName name = new ComponentName(context, FavMovieWidget.class);
+            int[] ids = AppWidgetManager.getInstance(context).getAppWidgetIds(name);
+
+            AppWidgetManager.getInstance(context).notifyAppWidgetViewDataChanged(ids, R.id.stack_view);
+
+        }
+
     }
 }
 

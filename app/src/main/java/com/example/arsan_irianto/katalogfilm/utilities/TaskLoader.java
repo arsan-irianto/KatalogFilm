@@ -2,8 +2,8 @@ package com.example.arsan_irianto.katalogfilm.utilities;
 
 //import android.content.AsyncTaskLoader;
 
-import android.support.v4.content.AsyncTaskLoader;
 import android.content.Context;
+import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
 import com.example.arsan_irianto.katalogfilm.BuildConfig;
@@ -24,13 +24,13 @@ import cz.msebera.android.httpclient.Header;
 
 public class TaskLoader extends AsyncTaskLoader<ArrayList<FilmItems>> {
 
+    public static final String NOW_PLAYING = "now_playing";
+    public static final String UPCOMING = "upcoming";
+    public static final String QUERY = "query";
     private ArrayList<FilmItems> mfilmData;
     private Boolean mHasResult = false;
     private String mJudulFilm;
     private String mUrlFilter;
-    public static final String NOW_PLAYING = "now_playing";
-    public static final String UPCOMING = "upcoming";
-    public static final String QUERY = "query";
 
     public TaskLoader(final Context context, String judulFilm, String filterBy) {
         super(context);
@@ -39,6 +39,7 @@ public class TaskLoader extends AsyncTaskLoader<ArrayList<FilmItems>> {
         this.mUrlFilter = filterBy;
 
     }
+
 
     @Override
     protected void onStartLoading() {
