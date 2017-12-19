@@ -19,7 +19,7 @@ public class MovieSchedulerTask {
     public void createPeriodicTask() {
         com.google.android.gms.gcm.Task periodicTask = new PeriodicTask.Builder()
                 .setService(MovieScheduleService.class)
-                .setPeriod(3600)//set repeat task every one hour
+                .setPeriod(60)//set repeat task every one hour
                 .setFlex(10)
                 .setTag(MovieScheduleService.TAG_TASK_MOVIE_LOG)
                 .setPersisted(true)

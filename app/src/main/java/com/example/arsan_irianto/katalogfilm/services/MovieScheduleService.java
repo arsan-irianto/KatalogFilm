@@ -79,7 +79,7 @@ public class MovieScheduleService extends GcmTaskService {
                             message = "Hari ini " + title + " release";
 
                             Intent notifyIntent = new Intent(getApplicationContext(), DetailNotificationActivity.class);
-                            notifyIntent.putExtra(DetailNotificationActivity.EXTRA_ID_MOVIE, film.getString("id"));
+                            notifyIntent.putExtra(DetailNotificationActivity.EXTRA_ID_MOVIE, film.getInt("id"));
                             PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),
                                     NotificationID.getID(), notifyIntent,
                                     PendingIntent.FLAG_UPDATE_CURRENT);

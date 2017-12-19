@@ -115,8 +115,11 @@ public class TaskLoader extends AsyncTaskLoader<ArrayList<FilmItems>> {
                     for (int i = 0; i < resultsJson.length(); i++) {
                         JSONObject film = resultsJson.getJSONObject(i);
                         FilmItems filmItems = new FilmItems(film);
+
+
                         filmItemsArrayList.add(filmItems);
                     }
+
 
                     Log.v("OnSuccess", result);
 

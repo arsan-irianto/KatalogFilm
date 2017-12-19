@@ -27,7 +27,7 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        String message = "Dicoding Catalogue Movie missing you..";
+        String message = "Catalogue Movie missing you..";
 
         String title = "Catalogue Movie";
         int notifId = NOTIF_ID_REPEATING;
@@ -37,7 +37,7 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
                 NotificationID.getID(), notifyIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Log.v("ON RECIEVE", title + " " + notifId);
+        Log.v("ON RECEIVE", title + " " + notifId);
         showAlarmNotification(context, title, message, notifId, pendingIntent);
         Toast.makeText(context, "I'm running", Toast.LENGTH_LONG).show();
     }
