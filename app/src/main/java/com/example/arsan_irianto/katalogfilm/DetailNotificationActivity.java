@@ -29,7 +29,8 @@ public class DetailNotificationActivity extends AppCompatActivity
     TextView tvVoter;
     @BindView(R.id.tv_genre)
     TextView tvGenre;
-
+    @BindView(R.id.tv_overview)
+    TextView tvOverview;
     @BindView(R.id.image_backdrop)
     ImageView imageBackdrop;
     @BindView(R.id.image_poster)
@@ -43,14 +44,12 @@ public class DetailNotificationActivity extends AppCompatActivity
         ButterKnife.bind(this);
         int id = getIntent().getIntExtra(EXTRA_ID_MOVIE, 0);
 
-/*        final String id = getIntent().getStringExtra(EXTRA_ID_MOVIE);
-
-        tvIdFilm.setText(id);*/
-
         Bundle bundle = new Bundle();
         bundle.putInt(EXTRA_ID_MOVIE, id);
 
         getSupportLoaderManager().initLoader(0, bundle, this);
+
+        setActionBarTitle("Release Today");
     }
 
     @Override
@@ -67,8 +66,9 @@ public class DetailNotificationActivity extends AppCompatActivity
         tvTitle.setText(data.getTitle());
         tvRelease.setText(data.getReleaseDate());
         tvRating.setText(data.getRating());
-        tvVoter.setText(data.getVoter());
+        tvVoter.setText(data.getVoter() + "");
         tvGenre.setText(data.getGenre());
+        tvOverview.setText(data.getOverview());
 
         Glide.with(this)
                 .load(data.getPosterImage())
@@ -84,5 +84,9 @@ public class DetailNotificationActivity extends AppCompatActivity
     @Override
     public void onLoaderReset(Loader<DetailFilmItem> loader) {
 
+    }
+
+    private void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
     }
 }

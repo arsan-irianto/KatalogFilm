@@ -110,7 +110,8 @@ public class MovieScheduleService extends GcmTaskService {
                 .setContentIntent(pendingIntent)
                 .setColor(ContextCompat.getColor(applicationContext, android.R.color.black))
                 .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
-                .setSound(alarmSound);
+                .setSound(alarmSound)
+                .setAutoCancel(true);
 
         notificationManagerCompat.notify(notifId, builder.build());
     }

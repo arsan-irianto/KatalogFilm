@@ -52,7 +52,8 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
                 .setContentIntent(pendingIntent)
                 .setColor(ContextCompat.getColor(context, android.R.color.transparent))
                 .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
-                .setSound(alarmSound);
+                .setSound(alarmSound)
+                .setAutoCancel(true);
 
         notificationManagerCompat.notify(notifId, builder.build());
     }

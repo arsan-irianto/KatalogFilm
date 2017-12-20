@@ -20,7 +20,11 @@
 
 
     <string name="btn_search">Search</string>
+    <string name="appwidget_text">Favourite Movies</string>
+    <string name="empty_text">No Data</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="content_title">Catalogue Movie</string>
+    <string name="content_text">Dicoding Catalogue Movie missing you..</string>
+
 </resources>
